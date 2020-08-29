@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppCine.Views.AboutPage"
+             xmlns:vm="clr-namespace:AppCine.ViewModels" xmlns:local="clr-namespace:AppCine.Utils.Behaviours"
+             Shell.NavBarIsVisible="False"  
+             BackgroundColor="#1c3e70"
+             x:Name="PeliculasAbout">
+    <ContentPage.Content>
+    <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="300" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <RelativeLayout Grid.Row="0" Margin="0" VerticalOptions="FillAndExpand">
+
+                <Image Source="{Binding Poster}" Aspect="AspectFill" VerticalOptions="FillAndExpand"
+                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                        Property=Height,Factor=0,Constant=0}"
+                        RelativeLayout.WidthConstraint="{ConstraintExpression
+                        Type=RelativeToParent,Property=Width,Factor=1,Constant=0}"
+                        RelativeLayout.HeightConstraint="{ConstraintExpression
+                        Type=RelativeToParent,Property=Height,Factor=1,Constant=0}"                   
+                       />
+                <Image Source="back.png" 
+                        RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                        Property=Height,Factor=.1,Constant=0}"
+                        RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                        Property=Width,Factor=.05,Constant=0}" 
+                             RelativeLayout.WidthConstraint="30"
+                            RelativeLayout.HeightConstraint="65" >
+
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer                    
+                        Command="{Binding BackCommand}"
+                        NumberOfTapsRequired="1" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </RelativeLayout>
+
+            <ScrollView Grid.Row="1" VerticalOptions="FillAndExpand"  >
+
+                <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" 
+                         Padding="20,20,20,20" >
+                    <StackLayout >
+                        <Label  Text="{Binding Title}" TextColor="White" FontAttributes="Bold"></Label>
+                        <Image  Source="stars.png" HorizontalOptions="End" WidthRequest="50"/>
+                        <Label Text="{Binding Overview}" TextColor="WhiteSmoke"/>
+
+                        <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never" HeightRequest="100">
+                            <StackLayout Margin="0,0,0,0" Orientation="Horizontal"                                          
+                                         BindableLayout.ItemsSource="{Binding Casting}" >
+                                <BindableLayout.ItemTemplate >
+                                    <DataTemplate>
+                                        <ContentView WidthRequest="60" Padding="0,10,0,10">
+                                            <StackLayout Padding="15,0,0,0">
+                                                <Frame CornerRadius="40" Padding="0" >
+                                                    <Image  Source="{Binding Thumbnail}" Aspect="AspectFill" VerticalOptions="Fill" 
+                                                    HeightRequest="45" />
+                                                </Frame>
+                                                <Label Text="{Binding name}" HorizontalTextAlignment="Center"
+                                               TextColor="White" FontSize="10" HeightRequest="25" />
+                                            </StackLayout>
+                                        </ContentView>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                        </ScrollView>
+
+                        <StackLayout Orientation="Horizontal" Spacing="0" HorizontalOptions="FillAndExpand"
+                                     >
+                            <Label Text="Genre:" TextColor="White" WidthRequest="60"/>
+                            <Label Text="{Binding Genre}"  TextColor="WhiteSmoke"
+                                   HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                        <StackLayout Orientation="Horizontal" Spacing="0" HorizontalOptions="FillAndExpand">
+                            <Label Text="Release:" TextColor="White" WidthRequest="60"/>
+                            <Label Text="{Binding Release}" TextColor="WhiteSmoke" HorizontalOptions="FillAndExpand" />
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

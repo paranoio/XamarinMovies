@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:AppCine.Utils.Behaviours"
+             mc:Ignorable="d"
+             x:Class="AppCine.Views.PeliculasPage"
+             x:Name="PeliculasMain"
+             Shell.NavBarIsVisible="False">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="#42a7f5" Spacing="0">
+            <StackLayout  Margin="50,50,50,50" >
+                <Label Text="Hello, what do you want to watch?" TextColor="White" FontSize="25" FontAttributes="Bold" ></Label>
+                <Frame CornerRadius="10" BackgroundColor="#cddff7" HeightRequest="40" Padding="0">
+                    <StackLayout Orientation="Horizontal" Margin="5,0,5,0">
+                        <Image  Source="search.png" HeightRequest="25" />
+                        <Entry TextColor="White" HorizontalOptions="FillAndExpand" x:Name="EntrySearch" 
+                               Placeholder="Search" PlaceholderColor="WhiteSmoke" 
+                               Text="{Binding SearchText}" >
+                            <Entry.Behaviors>
+                                <local:EventToCommandBehavior EventName="TextChanged" 
+                                       Command="{Binding SearchChangeCommand}"  />
+                            </Entry.Behaviors>
+                        </Entry>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+            <Frame CornerRadius="10" BackgroundColor="#1c3e70" Padding="0,20,0,20" VerticalOptions="FillAndExpand">
+                <ScrollView VerticalOptions="FillAndExpand"  >
+                    <StackLayout >
+                        <Label Padding="15,0,0,0" Text="TOP RATED" TextColor="White" FontAttributes="Bold"></Label>
+                        <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never" HeightRequest="200" >
+                            <StackLayout Margin="0,0,0,0" Orientation="Horizontal"                                          
+                                         BindableLayout.ItemsSource="{Binding TopMovies}" >
+                                <BindableLayout.ItemTemplate >
+                                    <DataTemplate>
+                                        <ContentView WidthRequest="110" Padding="0,10,0,10">
+                                            <StackLayout Padding="15,0,0,0">
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.TapMovieCommand,Source={x:Reference Name=PeliculasMain}}"
+                                                        CommandParameter="{Binding .}" NumberOfTapsRequired="1"/>
+                                                </StackLayout.GestureRecognizers>
+                                                <Frame CornerRadius="10" Padding="0" >
+                                                    <Image  Source="{Binding Thumbnail}" Aspect="AspectFill" VerticalOptions="Fill" HeightRequest="140" />
+                                                </Frame>
+                                                <Label Text="{Binding title}" TextColor="White" FontSize="10" HeightRequest="12" />
+                                                <Image  Source="stars.png"  />
+                                            </StackLayout>
+                                        </ContentView>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                        </ScrollView>
+
+                        <Label Padding="15,0,0,0" Text="UPCOMING" TextColor="White" FontAttributes="Bold"></Label>
+                        <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never" HeightRequest="200">
+                            <StackLayout Margin="0,0,0,0" Orientation="Horizontal"                                          
+                                         BindableLayout.ItemsSource="{Binding UpcomingMovies}" >
+                                <BindableLayout.ItemTemplate >
+                                    <DataTemplate>
+                                        <ContentView WidthRequest="110" Padding="0,10,0,10">
+                                            <StackLayout Padding="15,0,0,0">
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.TapMovieCommand,Source={x:Reference Name=PeliculasMain}}"
+                                                        CommandParameter="{Binding .}" NumberOfTapsRequired="1"/>
+                                                </StackLayout.GestureRecognizers>
+                                                <Frame CornerRadius="10" Padding="0" >
+                                                    <Image  Source="{Binding Thumbnail}" Aspect="AspectFill" VerticalOptions="Fill" HeightRequest="140" />
+                                                </Frame>
+                                                <Label Text="{Binding title}" TextColor="White" FontSize="10" HeightRequest="12" />
+                                                <Image  Source="stars.png"  />
+                                            </StackLayout>
+                                        </ContentView>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                        </ScrollView>
+
+                        <Label Padding="15,0,0,0" Text="POPULAR" TextColor="White" FontAttributes="Bold"></Label>
+                        <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never" HeightRequest="200">
+                            <StackLayout Margin="0,0,0,0" Orientation="Horizontal"                                          
+                                         BindableLayout.ItemsSource="{Binding PopularMovies}" >
+                                <BindableLayout.ItemTemplate >
+                                    <DataTemplate>
+                                        <ContentView WidthRequest="110" Padding="0,10,0,10">
+                                            <StackLayout Padding="15,0,0,0">
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Path=BindingContext.TapMovieCommand,Source={x:Reference Name=PeliculasMain}}"
+                                                        CommandParameter="{Binding .}" NumberOfTapsRequired="1"/>
+                                                </StackLayout.GestureRecognizers>
+                                                <Frame CornerRadius="10" Padding="0" >
+                                                    <Image  Source="{Binding Thumbnail}" Aspect="AspectFill" VerticalOptions="Fill" HeightRequest="140" />
+                                                </Frame>
+                                                <Label Text="{Binding title}" TextColor="White" FontSize="10" HeightRequest="12" />
+                                                <Image  Source="stars.png"  />
+                                            </StackLayout>
+                                        </ContentView>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                        </ScrollView>
+                    </StackLayout>
+                    
+                </ScrollView>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
